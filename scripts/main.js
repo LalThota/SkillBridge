@@ -40,7 +40,7 @@ const els = {
   pageTitle: document.getElementById('page-title'),
   navLinks: document.querySelectorAll('[data-nav]'),
   topNavLinks: document.querySelectorAll('.top-nav__link[data-nav]'),
-  pageSections: document.querySelectorAll('[data-page]'),
+  pageSections: document.querySelectorAll('.page-section'),
   gigsGrid: document.getElementById('gigs-grid'),
   noGigs: document.getElementById('empty-gigs'),
   searchInput: document.getElementById('gig-search'),
@@ -100,7 +100,7 @@ const els = {
   profileUserName: document.getElementById('profile-user-name')
 };
 
-const typingWords = ['Learn....', 'Practice....', 'Verify....', 'Earn!!!'];
+const typingWords = ['Learn', 'Practice', 'Verify', 'Earn'];
 let typeWordIndex = 0;
 let typeCharIndex = 0;
 let deleting = false;
@@ -126,33 +126,44 @@ async function init() {
 function showLandingPage() {
   const landingSection = document.getElementById('page-landing');
   const userPageHeader = document.getElementById('user-page-header');
-  const userDashboard = document.getElementById('page-dashboard');
+  const userSections = document.querySelectorAll('[data-page]');
   const layout = document.querySelector('.layout');
 
-  // Show landing, hide user content
+  els.pageSections.forEach((section) => section.classList.remove('page-section--active'));
   if (landingSection) {
     landingSection.removeAttribute('hidden');
     landingSection.classList.add('page-section--active');
   }
+
+  userSections.forEach((section) => section.setAttribute('hidden', ''));
   if (userPageHeader) userPageHeader.setAttribute('hidden', '');
-  if (userDashboard) userDashboard.setAttribute('hidden', '');
   if (layout) layout.classList.add('layout--full');
-  els.pageSections.forEach((section) => section.classList.remove('page-section--active'));
   
   // Update top-nav to show auth buttons only
   updateTopNavForGuest();
+
+  // Landing sections use reveal classes and must be observed in guest mode.
+  initRevealAnimation();
+
+  // Keep hero stats meaningful on landing as well.
+  initCounters();
+  syncGamification();
+
+  // Keep hero headline animated for guest view as well.
+  startTypingHeadline();
 }
 
 function showUserDashboard() {
   const landingSection = document.getElementById('page-landing');
   const userPageHeader = document.getElementById('user-page-header');
-  const userDashboard = document.getElementById('page-dashboard');
+  const userSections = document.querySelectorAll('[data-page]');
   const layout = document.querySelector('.layout');
 
   // Show user content, hide landing
+  els.pageSections.forEach((section) => section.classList.remove('page-section--active'));
   if (landingSection) landingSection.setAttribute('hidden', '');
+  userSections.forEach((section) => section.removeAttribute('hidden'));
   if (userPageHeader) userPageHeader.removeAttribute('hidden');
-  if (userDashboard) userDashboard.removeAttribute('hidden');
   if (layout) layout.classList.remove('layout--full');
 
   // Show auth info in top-nav
@@ -398,9 +409,20 @@ function bindEvents() {
 }
 
 function navigate(page) {
+  const isGuest = !state.token;
+  const userSections = document.querySelectorAll('[data-page]');
+
+  // Guard against blank states: if landing should be shown, force it.
+  if (isGuest && page === 'landing') {
+    showLandingPage();
+    return;
+  }
+
   state.page = page;
-  els.pageSections.forEach((section) => {
-    section.classList.toggle('page-section--active', section.id === `page-${page}`);
+  userSections.forEach((section) => {
+    const isTarget = section.id === `page-${page}`;
+    section.classList.toggle('page-section--active', isTarget);
+    section.toggleAttribute('hidden', !isTarget);
   });
 
   els.navLinks.forEach((link) => {
@@ -869,8 +891,8 @@ function getBotReply(text) {
 }
 
 function initCounters() {
-  animateCount(els.statUsers, 10000, '+ Users');
-  animateCount(els.statGigs, 500, '+ Gigs');
+  animateCount(els.statUsers, 500, '+');
+  animateCount(els.statGigs, 50, '+');
 }
 
 function animateCount(el, target, suffix) {
