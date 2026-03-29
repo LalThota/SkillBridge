@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge — Connect. Work. Grow.</title>
+  <meta name="description" content="SkillBridge connects students and professionals with part-time jobs, freelance gigs, and short-term work opportunities. Flexible income, endless possibilities." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- LANDING PAGE                                -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="page-landing" class="page page--active">
+    <!-- Landing Nav -->
+    <nav class="landing-nav" id="landing-nav">
+      <div class="landing-nav__inner">
+        <a href="#" class="logo">
+          <span class="logo__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="8" fill="url(#logo-grad)" />
+              <path d="M10 22V14L16 10L22 14V22L16 18L10 22Z" fill="white" opacity="0.9"/>
+              <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#4F46E5"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs>
+            </svg>
+          </span>
+          <span class="logo__text">SkillBridge</span>
+        </a>
+        <div class="landing-nav__links" id="landing-nav-links">
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#testimonials">Testimonials</a>
+        </div>
+        <div class="landing-nav__actions">
+          <button class="btn btn--ghost" onclick="navigateTo('dashboard')">Log In</button>
+          <button class="btn btn--primary" onclick="navigateTo('dashboard')">Get Started</button>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero__bg">
+        <div class="hero__orb hero__orb--1"></div>
+        <div class="hero__orb hero__orb--2"></div>
+        <div class="hero__orb hero__orb--3"></div>
+        <div class="hero__grid"></div>
+      </div>
+      <div class="hero__content reveal">
+        <span class="hero__badge">🚀 The Future of Flexible Work</span>
+        <h1 class="hero__title">
+          Find Your Next<br />
+          <span class="gradient-text">Opportunity</span> Today
+        </h1>
+        <p class="hero__subtitle">
+          SkillBridge connects students &amp; professionals with part-time jobs,
+          freelance gigs, and short-term work — all in one beautiful platform.
+        </p>
+        <div class="hero__cta">
+          <button class="btn btn--primary btn--lg" onclick="navigateTo('dashboard')">
+            Start Earning
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="btn btn--glass btn--lg" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+            Learn More
+          </button>
+        </div>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="12500">0</span>
+            <span class="hero__stat-label">Active Jobs</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="8400">0</span>
+            <span class="hero__stat-label">Professionals</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="2100">0</span>
+            <span class="hero__stat-label">Companies</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Cards -->
+      <div class="hero__floating">
+        <div class="floating-card floating-card--1 reveal">
+          <div class="floating-card__icon" style="background: linear-gradient(135deg, #4F46E5, #7C3AED);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 7H4C2.89 7 2 7.89 2 9V19C2 20.1 2.89 21 4 21H20C21.1 21 22 20.1 22 19V9C22 7.89 21.1 7 20 7ZM20 19H4V9H20V19ZM12 12C10.34 12 9 13.34 9 15S10.34 18 12 18 15 16.66 15 15 13.66 12 12 12ZM2 5H22V3H2V5Z" fill="white"/></svg>
+          </div>
+          <div>
+            <div class="floating-card__label">Today's Earnings</div>
+            <div class="floating-card__value">$1,240</div>
+          </div>
+        </div>
+        <div class="floating-card floating-card--2 reveal">
+          <div class="floating-card__icon" style="background: linear-gradient(135deg, #06B6D4, #10B981);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="white"/></svg>
+          </div>
+          <div>
+            <div class="floating-card__label">Gig Completed</div>
+            <div class="floating-card__value">UI Design — $350</div>
+          </div>
+        </div>
+        <div class="floating-card floating-card--3 reveal">
+          <div class="floating-card__icon" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" fill="white"/></svg>
+          </div>
+          <div>
+            <div class="floating-card__label">New Rating</div>
+            <div class="floating-card__value">⭐ 4.9 / 5.0</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Features -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__badge">✨ Features</span>
+          <h2 class="section__title">Everything You Need to <span class="gradient-text">Succeed</span></h2>
+          <p class="section__subtitle">Powerful tools designed to help you discover opportunities, manage gigs, and grow your career.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="feature-card__icon" style="background: linear-gradient(135deg, #4F46E5, #7C3AED);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z" fill="white"/></svg>
+            </div>
+            <h3>Smart Discovery</h3>
+            <p>AI-powered job matching finds roles tailored to your skills, schedule, and goals.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-card__icon" style="background: linear-gradient(135deg, #06B6D4, #10B981);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M11.8 10.9C9.53 10.31 8.8 9.7 8.8 8.75C8.8 7.66 9.81 6.9 11.5 6.9C13.28 6.9 13.94 7.75 14 9H16.21C16.14 7.28 15.09 5.7 13 5.19V3H10V5.16C8.06 5.58 6.5 6.84 6.5 8.77C6.5 11.08 8.41 12.23 11.2 12.9C13.7 13.5 14.2 14.38 14.2 15.31C14.2 16 13.71 17.1 11.5 17.1C9.44 17.1 8.63 16.18 8.52 15H6.32C6.44 17.19 8.08 18.42 10 18.83V21H13V18.85C14.95 18.48 16.5 17.35 16.5 15.3C16.5 12.46 14.07 11.49 11.8 10.9Z" fill="white"/></svg>
+            </div>
+            <h3>Instant Payments</h3>
+            <p>Get paid fast with secure, transparent payment processing built right in.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-card__icon" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M16 11C17.66 11 18.99 9.66 18.99 8S17.66 5 16 5C14.34 5 13 6.34 13 8S14.34 11 16 11ZM8 11C9.66 11 10.99 9.66 10.99 8S9.66 5 8 5C6.34 5 5 6.34 5 8S6.34 11 8 11ZM8 13C5.67 13 1 14.17 1 16.5V19H15V16.5C15 14.17 10.33 13 8 13ZM16 13C15.71 13 15.38 13.02 15.03 13.05C16.19 13.89 17 15.02 17 16.5V19H23V16.5C23 14.17 18.33 13 16 13Z" fill="white"/></svg>
+            </div>
+            <h3>Community</h3>
+            <p>Connect with a vibrant network of peers, mentors, and industry professionals.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-card__icon" style="background: linear-gradient(135deg, #EC4899, #8B5CF6);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17H7V10H9V17ZM13 17H11V7H13V17ZM17 17H15V13H17V17Z" fill="white"/></svg>
+            </div>
+            <h3>Analytics Dashboard</h3>
+            <p>Track your earnings, performance metrics, and growth with beautiful charts.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-card__icon" style="background: linear-gradient(135deg, #14B8A6, #3B82F6);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM10 17L6 13L7.41 11.59L10 14.17L16.59 7.58L18 9L10 17Z" fill="white"/></svg>
+            </div>
+            <h3>Verified Employers</h3>
+            <p>Every company is vetted so you can work with confidence and peace of mind.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-card__icon" style="background: linear-gradient(135deg, #6366F1, #06B6D4);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M17 1.01L7 1C5.9 1 5 1.9 5 3V21C5 22.1 5.9 23 7 23H17C18.1 23 19 22.1 19 21V3C19 1.9 18.1 1.01 17 1.01ZM17 19H7V5H17V19Z" fill="white"/></svg>
+            </div>
+            <h3>Mobile Ready</h3>
+            <p>Apply to gigs, track earnings, and manage your profile from any device.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section section--alt" id="how-it-works">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__badge">🔧 How It Works</span>
+          <h2 class="section__title">Three Steps to <span class="gradient-text">Earning</span></h2>
+          <p class="section__subtitle">Getting started is simple. Sign up, discover opportunities, and start earning in minutes.</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card reveal">
+            <div class="step-card__number">01</div>
+            <h3>Create Your Profile</h3>
+            <p>Showcase your skills, experience, and availability. Let employers find the perfect match.</p>
+          </div>
+          <div class="step-card reveal">
+            <div class="step-card__number">02</div>
+            <h3>Discover & Apply</h3>
+            <p>Browse curated opportunities or let our AI suggest gigs that match your expertise.</p>
+          </div>
+          <div class="step-card reveal">
+            <div class="step-card__number">03</div>
+            <h3>Work & Get Paid</h3>
+            <p>Complete gigs on your schedule and receive instant, secure payments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__badge">💬 Testimonials</span>
+          <h2 class="section__title">Loved by <span class="gradient-text">Thousands</span></h2>
+          <p class="section__subtitle">Hear from real users who transformed their careers with SkillBridge.</p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card reveal">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p>"SkillBridge helped me land my first freelance gig as a CS student. I've earned $4,200 so far while keeping up with classes."</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" style="background: linear-gradient(135deg, #4F46E5, #7C3AED);">AK</div>
+              <div>
+                <div class="testimonial-card__name">Anya Kapoor</div>
+                <div class="testimonial-card__role">Computer Science Student</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p>"As a working mom, the flexibility is unmatched. I pick gigs around my schedule and the payments are always on time."</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" style="background: linear-gradient(135deg, #06B6D4, #10B981);">SR</div>
+              <div>
+                <div class="testimonial-card__name">Sarah Rodriguez</div>
+                <div class="testimonial-card__role">UX Designer</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p>"We've hired 30+ contractors through SkillBridge. The talent quality and vetting process is exceptional."</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">JM</div>
+              <div>
+                <div class="testimonial-card__name">James Mitchell</div>
+                <div class="testimonial-card__role">Startup Founder</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-block reveal">
+          <div class="cta-block__bg">
+            <div class="cta-block__orb cta-block__orb--1"></div>
+            <div class="cta-block__orb cta-block__orb--2"></div>
+          </div>
+          <h2>Ready to Start Your Journey?</h2>
+          <p>Join 8,000+ professionals earning on their own terms.</p>
+          <button class="btn btn--white btn--lg" onclick="navigateTo('dashboard')">
+            Get Started — It's Free
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <a href="#" class="logo">
+              <span class="logo__icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#logo-grad2)"/><path d="M10 22V14L16 10L22 14V22L16 18L10 22Z" fill="white" opacity="0.9"/><defs><linearGradient id="logo-grad2" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#4F46E5"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs></svg>
+              </span>
+              <span class="logo__text">SkillBridge</span>
+            </a>
+            <p>Connecting talent with opportunity. The future of flexible work is here.</p>
+          </div>
+          <div class="footer__col">
+            <h4>Platform</h4>
+            <a href="#">Find Jobs</a>
+            <a href="#">Post a Gig</a>
+            <a href="#">Pricing</a>
+            <a href="#">Enterprise</a>
+          </div>
+          <div class="footer__col">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Careers</a>
+            <a href="#">Blog</a>
+            <a href="#">Press</a>
+          </div>
+          <div class="footer__col">
+            <h4>Support</h4>
+            <a href="#">Help Center</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p>&copy; 2026 SkillBridge. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- APP SHELL (Dashboard, Jobs, Profile, etc.)  -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="app-shell" class="app-shell" style="display: none;">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__header">
+        <a href="#" class="logo" onclick="navigateTo('landing'); return false;">
+          <span class="logo__icon">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#logo-grad3)"/><path d="M10 22V14L16 10L22 14V22L16 18L10 22Z" fill="white" opacity="0.9"/><defs><linearGradient id="logo-grad3" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#4F46E5"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs></svg>
+          </span>
+          <span class="logo__text sidebar__logo-text">SkillBridge</span>
+        </a>
+      </div>
+      <nav class="sidebar__nav">
+        <a href="#" class="sidebar__link sidebar__link--active" data-page="dashboard" id="nav-dashboard">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 13H11V3H3V13ZM3 21H11V15H3V21ZM13 21H21V11H13V21ZM13 3V9H21V3H13Z" fill="currentColor"/></svg>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="jobs" id="nav-jobs">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6H16V4C16 2.89 15.11 2 14 2H10C8.89 2 8 2.89 8 4V6H4C2.89 6 2.01 6.89 2.01 8L2 19C2 20.11 2.89 21 4 21H20C21.11 21 22 20.11 22 19V8C22 6.89 21.11 6 20 6ZM14 6H10V4H14V6Z" fill="currentColor"/></svg>
+          <span>Jobs</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="profile" id="nav-profile">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 12C14.21 12 16 10.21 16 8S14.21 4 12 4 8 5.79 8 8 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/></svg>
+          <span>Profile</span>
+        </a>
+        <a href="#" class="sidebar__link" data-page="earnings" id="nav-earnings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M11.8 10.9C9.53 10.31 8.8 9.7 8.8 8.75C8.8 7.66 9.81 6.9 11.5 6.9C13.28 6.9 13.94 7.75 14 9H16.21C16.14 7.28 15.09 5.7 13 5.19V3H10V5.16C8.06 5.58 6.5 6.84 6.5 8.77C6.5 11.08 8.41 12.23 11.2 12.9C13.7 13.5 14.2 14.38 14.2 15.31C14.2 16 13.71 17.1 11.5 17.1C9.44 17.1 8.63 16.18 8.52 15H6.32C6.44 17.19 8.08 18.42 10 18.83V21H13V18.85C14.95 18.48 16.5 17.35 16.5 15.3C16.5 12.46 14.07 11.49 11.8 10.9Z" fill="currentColor"/></svg>
+          <span>Earnings</span>
+        </a>
+      </nav>
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar">
+            <span>AK</span>
+          </div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name">Alex Kumar</span>
+            <span class="sidebar__user-role">Freelancer</span>
+          </div>
+        </div>
+        <button class="btn btn--ghost btn--sm" onclick="navigateTo('landing')" id="btn-logout" title="Log Out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Mobile Top Bar -->
+    <div class="mobile-topbar" id="mobile-topbar">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 18H21V16H3V18ZM3 13H21V11H3V13ZM3 6V8H21V6H3Z" fill="currentColor"/></svg>
+      </button>
+      <span class="mobile-topbar__title">SkillBridge</span>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="main-content">
+
+      <!-- ──── DASHBOARD PAGE ──── -->
+      <div class="app-page app-page--active" id="app-dashboard">
+        <div class="page-header">
+          <div>
+            <h1 class="page-header__title">Welcome back, Alex 👋</h1>
+            <p class="page-header__subtitle">Here's what's happening with your gigs today.</p>
+          </div>
+          <button class="btn btn--primary" onclick="navigateTo('jobs')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14Z" fill="currentColor"/></svg>
+            Find New Gigs
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-card stat-card--earnings">
+            <div class="stat-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M11.8 10.9C9.53 10.31 8.8 9.7 8.8 8.75C8.8 7.66 9.81 6.9 11.5 6.9C13.28 6.9 13.94 7.75 14 9H16.21C16.14 7.28 15.09 5.7 13 5.19V3H10V5.16C8.06 5.58 6.5 6.84 6.5 8.77C6.5 11.08 8.41 12.23 11.2 12.9C13.7 13.5 14.2 14.38 14.2 15.31C14.2 16 13.71 17.1 11.5 17.1C9.44 17.1 8.63 16.18 8.52 15H6.32C6.44 17.19 8.08 18.42 10 18.83V21H13V18.85C14.95 18.48 16.5 17.35 16.5 15.3C16.5 12.46 14.07 11.49 11.8 10.9Z" fill="currentColor"/></svg>
+            </div>
+            <div class="stat-card__info">
+              <span class="stat-card__label">Total Earnings</span>
+              <span class="stat-card__value counter" data-target="12450">$0</span>
+              <span class="stat-card__change stat-card__change--up">↑ 12.5% from last month</span>
+            </div>
+          </div>
+          <div class="stat-card stat-card--applications">
+            <div class="stat-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19 3H14.82C14.4 1.84 13.3 1 12 1S9.6 1.84 9.18 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM12 3C12.55 3 13 3.45 13 4S12.55 5 12 5 11 4.55 11 4 11.45 3 12 3ZM14 17H7V15H14V17ZM17 13H7V11H17V13ZM17 9H7V7H17V9Z" fill="currentColor"/></svg>
+            </div>
+            <div class="stat-card__info">
+              <span class="stat-card__label">Applications</span>
+              <span class="stat-card__value counter" data-target="24">0</span>
+              <span class="stat-card__change stat-card__change--up">↑ 4 new this week</span>
+            </div>
+          </div>
+          <div class="stat-card stat-card--gigs">
+            <div class="stat-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 6H16V4C16 2.89 15.11 2 14 2H10C8.89 2 8 2.89 8 4V6H4C2.89 6 2.01 6.89 2.01 8L2 19C2 20.11 2.89 21 4 21H20C21.11 21 22 20.11 22 19V8C22 6.89 21.11 6 20 6ZM14 6H10V4H14V6Z" fill="currentColor"/></svg>
+            </div>
+            <div class="stat-card__info">
+              <span class="stat-card__label">Active Gigs</span>
+              <span class="stat-card__value counter" data-target="5">0</span>
+              <span class="stat-card__change stat-card__change--neutral">2 due this week</span>
+            </div>
+          </div>
+          <div class="stat-card stat-card--rating">
+            <div class="stat-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" fill="currentColor"/></svg>
+            </div>
+            <div class="stat-card__info">
+              <span class="stat-card__label">Rating</span>
+              <span class="stat-card__value">4.9 ★</span>
+              <span class="stat-card__change stat-card__change--up">Top 5% freelancer</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity + Recommended -->
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card__header">
+              <h2 class="card__title">Recent Activity</h2>
+              <a href="#" class="card__link" onclick="navigateTo('earnings'); return false;">View All</a>
+            </div>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-item__icon activity-item__icon--success">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="currentColor"/></svg>
+                </div>
+                <div class="activity-item__info">
+                  <span class="activity-item__title">Payment received — Logo Design</span>
+                  <span class="activity-item__time">2 hours ago</span>
+                </div>
+                <span class="activity-item__amount activity-item__amount--up">+$350</span>
+              </div>
+              <div class="activity-item">
+                <div class="activity-item__icon activity-item__icon--info">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="currentColor"/></svg>
+                </div>
+                <div class="activity-item__info">
+                  <span class="activity-item__title">New message from TechCorp</span>
+                  <span class="activity-item__time">5 hours ago</span>
+                </div>
+                <span class="activity-item__badge">New</span>
+              </div>
+              <div class="activity-item">
+                <div class="activity-item__icon activity-item__icon--warning">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="currentColor"/></svg>
+                </div>
+                <div class="activity-item__info">
+                  <span class="activity-item__title">Deadline approaching — API Integration</span>
+                  <span class="activity-item__time">1 day ago</span>
+                </div>
+                <span class="activity-item__badge activity-item__badge--warning">Urgent</span>
+              </div>
+              <div class="activity-item">
+                <div class="activity-item__icon activity-item__icon--success">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" fill="currentColor"/></svg>
+                </div>
+                <div class="activity-item__info">
+                  <span class="activity-item__title">New 5-star review from DataSync</span>
+                  <span class="activity-item__time">2 days ago</span>
+                </div>
+                <span class="activity-item__amount activity-item__amount--up">⭐ 5.0</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__header">
+              <h2 class="card__title">Recommended for You</h2>
+              <a href="#" class="card__link" onclick="navigateTo('jobs'); return false;">See All Jobs</a>
+            </div>
+            <div class="recommended-list">
+              <div class="recommended-item" onclick="openJobModal(0)">
+                <div class="recommended-item__logo" style="background: linear-gradient(135deg, #4F46E5, #7C3AED);">N</div>
+                <div class="recommended-item__info">
+                  <span class="recommended-item__title">Frontend Developer</span>
+                  <span class="recommended-item__company">NovaTech Solutions</span>
+                </div>
+                <span class="recommended-item__pay">$45/hr</span>
+              </div>
+              <div class="recommended-item" onclick="openJobModal(1)">
+                <div class="recommended-item__logo" style="background: linear-gradient(135deg, #06B6D4, #10B981);">S</div>
+                <div class="recommended-item__info">
+                  <span class="recommended-item__title">UI/UX Designer</span>
+                  <span class="recommended-item__company">StartupHub</span>
+                </div>
+                <span class="recommended-item__pay">$40/hr</span>
+              </div>
+              <div class="recommended-item" onclick="openJobModal(2)">
+                <div class="recommended-item__logo" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">C</div>
+                <div class="recommended-item__info">
+                  <span class="recommended-item__title">Data Analyst</span>
+                  <span class="recommended-item__company">CloudMetrics</span>
+                </div>
+                <span class="recommended-item__pay">$55/hr</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ──── JOBS PAGE ──── -->
+      <div class="app-page" id="app-jobs">
+        <div class="page-header">
+          <div>
+            <h1 class="page-header__title">Job Listings</h1>
+            <p class="page-header__subtitle">Discover opportunities that match your skills.</p>
+          </div>
+        </div>
+        <div class="jobs-toolbar">
+          <div class="search-box" id="search-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z" fill="currentColor"/></svg>
+            <input type="text" placeholder="Search jobs, companies, skills..." id="job-search-input" />
+          </div>
+          <div class="filter-chips">
+            <button class="chip chip--active" data-filter="all">All</button>
+            <button class="chip" data-filter="development">Development</button>
+            <button class="chip" data-filter="design">Design</button>
+            <button class="chip" data-filter="marketing">Marketing</button>
+            <button class="chip" data-filter="data">Data</button>
+            <button class="chip" data-filter="writing">Writing</button>
+          </div>
+        </div>
+        <div class="jobs-grid" id="jobs-grid">
+          <!-- Jobs rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ──── PROFILE PAGE ──── -->
+      <div class="app-page" id="app-profile">
+        <div class="page-header">
+          <div>
+            <h1 class="page-header__title">My Profile</h1>
+            <p class="page-header__subtitle">Manage your professional presence.</p>
+          </div>
+          <button class="btn btn--primary" id="btn-edit-profile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 17.25V21H6.75L17.81 9.94L14.06 6.19L3 17.25ZM20.71 7.04C21.1 6.65 21.1 6.02 20.71 5.63L18.37 3.29C17.98 2.9 17.35 2.9 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04Z" fill="currentColor"/></svg>
+            Edit Profile
+          </button>
+        </div>
+
+        <div class="profile-layout">
+          <div class="profile-card card">
+            <div class="profile-card__banner"></div>
+            <div class="profile-card__body">
+              <div class="profile-card__avatar">
+                <span>AK</span>
+              </div>
+              <h2 class="profile-card__name">Alex Kumar</h2>
+              <p class="profile-card__title">Full-Stack Developer & UI Designer</p>
+              <div class="profile-card__meta">
+                <span>📍 San Francisco, CA</span>
+                <span>💼 Freelancer</span>
+                <span>⭐ 4.9 Rating</span>
+              </div>
+              <p class="profile-card__bio">Passionate developer with 3+ years of experience in building modern web applications. Specialized in React, Node.js, and design systems. Open to part-time and freelance gigs.</p>
+              <div class="profile-card__stats">
+                <div class="profile-card__stat">
+                  <span class="profile-card__stat-value">47</span>
+                  <span class="profile-card__stat-label">Gigs Completed</span>
+                </div>
+                <div class="profile-card__stat">
+                  <span class="profile-card__stat-value">$12.4K</span>
+                  <span class="profile-card__stat-label">Earned</span>
+                </div>
+                <div class="profile-card__stat">
+                  <span class="profile-card__stat-value">98%</span>
+                  <span class="profile-card__stat-label">Success Rate</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-details">
+            <div class="card">
+              <div class="card__header">
+                <h2 class="card__title">Skills & Expertise</h2>
+              </div>
+              <div class="skills-grid">
+                <div class="skill-item">
+                  <div class="skill-item__header">
+                    <span>React.js</span>
+                    <span>95%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-bar__fill" data-width="95"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-item__header">
+                    <span>Node.js</span>
+                    <span>88%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-bar__fill" data-width="88"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-item__header">
+                    <span>UI/UX Design</span>
+                    <span>82%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-bar__fill" data-width="82"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-item__header">
+                    <span>Python</span>
+                    <span>75%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-bar__fill" data-width="75"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-item__header">
+                    <span>TypeScript</span>
+                    <span>90%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-bar__fill" data-width="90"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-item__header">
+                    <span>PostgreSQL</span>
+                    <span>70%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-bar__fill" data-width="70"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card__header">
+                <h2 class="card__title">Skill Tags</h2>
+              </div>
+              <div class="tag-cloud">
+                <span class="tag">JavaScript</span>
+                <span class="tag">React</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Figma</span>
+                <span class="tag">CSS</span>
+                <span class="tag">Python</span>
+                <span class="tag">REST API</span>
+                <span class="tag">GraphQL</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Git</span>
+                <span class="tag">Docker</span>
+                <span class="tag">AWS</span>
+                <span class="tag">Tailwind</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card__header">
+                <h2 class="card__title">Resume & Portfolio</h2>
+              </div>
+              <div class="resume-items">
+                <div class="resume-item">
+                  <div class="resume-item__icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2ZM16 18H8V16H16V18ZM16 14H8V12H16V14ZM13 9V3.5L18.5 9H13Z" fill="currentColor"/></svg>
+                  </div>
+                  <div class="resume-item__info">
+                    <span class="resume-item__title">Resume_AlexKumar_2026.pdf</span>
+                    <span class="resume-item__meta">Updated March 2026 · 2 pages</span>
+                  </div>
+                  <button class="btn btn--ghost btn--sm">View</button>
+                </div>
+                <div class="resume-item">
+                  <div class="resume-item__icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM11 19.93C7.05 19.44 4 16.08 4 12C4 11.38 4.08 10.79 4.21 10.21L9 15V16C9 17.1 9.9 18 11 18V19.93ZM17.9 17.39C17.64 16.58 16.9 16 16 16H15V13C15 12.45 14.55 12 14 12H8V10H10C10.55 10 11 9.55 11 9V7H13C14.1 7 15 6.1 15 5V4.59C17.93 5.78 20 8.65 20 12C20 14.08 19.2 15.97 17.9 17.39Z" fill="currentColor"/></svg>
+                  </div>
+                  <div class="resume-item__info">
+                    <span class="resume-item__title">Portfolio Website</span>
+                    <span class="resume-item__meta">alexkumar.dev · 12 projects</span>
+                  </div>
+                  <button class="btn btn--ghost btn--sm">Visit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ──── EARNINGS PAGE ──── -->
+      <div class="app-page" id="app-earnings">
+        <div class="page-header">
+          <div>
+            <h1 class="page-header__title">Earnings</h1>
+            <p class="page-header__subtitle">Track your income and payment history.</p>
+          </div>
+          <button class="btn btn--primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M19 9H15V3H9V9H5L12 16L19 9ZM5 18V20H19V18H5Z" fill="currentColor"/></svg>
+            Export Report
+          </button>
+        </div>
+
+        <div class="earnings-stats">
+          <div class="earnings-card earnings-card--total">
+            <div class="earnings-card__header">
+              <span class="earnings-card__label">Total Earnings</span>
+              <span class="earnings-card__period">All Time</span>
+            </div>
+            <span class="earnings-card__value counter" data-target="12450" data-prefix="$">$0</span>
+            <div class="earnings-card__bar">
+              <div class="earnings-card__bar-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+          <div class="earnings-card earnings-card--month">
+            <div class="earnings-card__header">
+              <span class="earnings-card__label">This Month</span>
+              <span class="earnings-card__change earnings-card__change--up">+18.2%</span>
+            </div>
+            <span class="earnings-card__value counter" data-target="2840" data-prefix="$">$0</span>
+            <div class="earnings-card__bar">
+              <div class="earnings-card__bar-fill" style="width: 72%;"></div>
+            </div>
+          </div>
+          <div class="earnings-card earnings-card--pending">
+            <div class="earnings-card__header">
+              <span class="earnings-card__label">Pending</span>
+              <span class="earnings-card__period">2 invoices</span>
+            </div>
+            <span class="earnings-card__value counter" data-target="1200" data-prefix="$">$0</span>
+            <div class="earnings-card__bar">
+              <div class="earnings-card__bar-fill" style="width: 45%;"></div>
+            </div>
+          </div>
+          <div class="earnings-card earnings-card--withdrawn">
+            <div class="earnings-card__header">
+              <span class="earnings-card__label">Withdrawn</span>
+              <span class="earnings-card__period">Lifetime</span>
+            </div>
+            <span class="earnings-card__value counter" data-target="9410" data-prefix="$">$0</span>
+            <div class="earnings-card__bar">
+              <div class="earnings-card__bar-fill" style="width: 85%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Payment History</h2>
+          </div>
+          <div class="payment-table-wrap">
+            <table class="payment-table">
+              <thead>
+                <tr>
+                  <th>Project</th>
+                  <th>Client</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Landing Page Redesign</strong></td>
+                  <td>NovaTech</td>
+                  <td>Mar 25, 2026</td>
+                  <td><strong>$800</strong></td>
+                  <td><span class="status-badge status-badge--paid">Paid</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Logo Design</strong></td>
+                  <td>StartupHub</td>
+                  <td>Mar 22, 2026</td>
+                  <td><strong>$350</strong></td>
+                  <td><span class="status-badge status-badge--paid">Paid</span></td>
+                </tr>
+                <tr>
+                  <td><strong>API Integration</strong></td>
+                  <td>CloudMetrics</td>
+                  <td>Mar 18, 2026</td>
+                  <td><strong>$1,200</strong></td>
+                  <td><span class="status-badge status-badge--pending">Pending</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Mobile App UI</strong></td>
+                  <td>DataSync</td>
+                  <td>Mar 12, 2026</td>
+                  <td><strong>$650</strong></td>
+                  <td><span class="status-badge status-badge--paid">Paid</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Dashboard Components</strong></td>
+                  <td>TechCorp</td>
+                  <td>Mar 5, 2026</td>
+                  <td><strong>$490</strong></td>
+                  <td><span class="status-badge status-badge--paid">Paid</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Brand Identity</strong></td>
+                  <td>GreenLeaf</td>
+                  <td>Feb 28, 2026</td>
+                  <td><strong>$720</strong></td>
+                  <td><span class="status-badge status-badge--paid">Paid</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- JOB DETAILS MODAL                           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="job-modal">
+      <button class="modal__close" id="modal-close" aria-label="Close modal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="currentColor"/></svg>
+      </button>
+      <div class="modal__body" id="modal-body">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
