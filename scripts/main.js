@@ -1,209 +1,7 @@
-const gigs = [
-  {
-    id: 1,
-    title: 'Frontend Landing Page Revamp',
-    price: 18000,
-    category: 'Development',
-    skill: 'HTML & CSS',
-    level: 'Beginner',
-    hours: '6-8 hrs',
-    company: 'PixelMint Labs',
-    description: 'Build a responsive landing page section with modern styling and basic animations.',
-    requiredSkill: 'HTML & CSS'
-  },
-  {
-    id: 2,
-    title: 'Interactive Dashboard Widgets',
-    price: 32000,
-    category: 'Development',
-    skill: 'JavaScript',
-    level: 'Intermediate',
-    hours: '10-14 hrs',
-    company: 'DashForge',
-    description: 'Create reusable dashboard widgets with filters, counters, and chart interactions.',
-    requiredSkill: 'JavaScript'
-  },
-  {
-    id: 3,
-    title: 'React Portfolio Builder',
-    price: 42000,
-    category: 'Development',
-    skill: 'React',
-    level: 'Intermediate',
-    hours: '14-18 hrs',
-    company: 'HirePulse',
-    description: 'Develop a modular React portfolio with project cards and contact form validation.',
-    requiredSkill: 'React'
-  },
-  {
-    id: 4,
-    title: 'Mobile App Wireframe Sprint',
-    price: 22000,
-    category: 'Design',
-    skill: 'UI/UX Design',
-    level: 'Beginner',
-    hours: '8-10 hrs',
-    company: 'SketchRoot',
-    description: 'Design mobile-first wireframes and clickable prototype screens for a startup app.',
-    requiredSkill: 'UI/UX Design'
-  },
-  {
-    id: 5,
-    title: 'Backend Data Cleanup Script',
-    price: 27000,
-    category: 'Data',
-    skill: 'Python',
-    level: 'Beginner',
-    hours: '8-12 hrs',
-    company: 'DataNest',
-    description: 'Write simple scripts to clean and validate CSV data records for reporting.',
-    requiredSkill: 'Python'
-  },
-  {
-    id: 6,
-    title: 'Career Blog Enhancement',
-    price: 15000,
-    category: 'Writing',
-    skill: 'HTML & CSS',
-    level: 'Beginner',
-    hours: '5-7 hrs',
-    company: 'GrowthMemo',
-    description: 'Improve article layout with heading structure, links, and media embeds.',
-    requiredSkill: 'HTML & CSS'
-  },
-  {
-    id: 7,
-    title: 'Component Animation Microtasks',
-    price: 24000,
-    category: 'Design',
-    skill: 'JavaScript',
-    level: 'Intermediate',
-    hours: '7-9 hrs',
-    company: 'MotionDock',
-    description: 'Add button ripple effects, reveal transitions, and hover micro-interactions.',
-    requiredSkill: 'JavaScript'
-  },
-  {
-    id: 8,
-    title: 'Client Analytics Report UI',
-    price: 35000,
-    category: 'Data',
-    skill: 'React',
-    level: 'Intermediate',
-    hours: '10-13 hrs',
-    company: 'MetricThread',
-    description: 'Create charts and KPI visualizations with responsive interactions for client reports.',
-    requiredSkill: 'React'
-  }
-];
-
-const learningTracks = {
-  'HTML & CSS': {
-    notes: [
-      'HTML gives structure to your web page and CSS controls its visual style.',
-      'A page usually has a head and body. Keep semantic tags like header, main, and footer.',
-      'Use headings, paragraphs, images, and links to present content clearly.',
-      'Mini task: Create a page with one heading, one image, and one external link.',
-      'Common mistakes: skipping alt text, overusing div tags, and inconsistent spacing.'
-    ],
-    videos: [
-      'https://www.youtube.com/embed/qz0aGYrrlhU',
-      'https://www.youtube.com/embed/1Rs2ND1ryYc'
-    ],
-    practiceTask: 'Create a simple webpage with heading, image, and link. Style it with a card layout and soft shadow.',
-    quiz: [
-      { q: 'What does HTML stand for?', options: ['Hyper Text Markup Language', 'High Text Model Language', 'Hyperlink and Text Markup Language', 'Home Tool Markup Language'], a: 0 },
-      { q: 'Which tag is used for a paragraph?', options: ['<paragraph>', '<text>', '<p>', '<pg>'], a: 2 },
-      { q: 'Which CSS property changes text color?', options: ['font-color', 'color', 'text-style', 'background-color'], a: 1 },
-      { q: 'Which tag adds an image?', options: ['<img>', '<picture>', '<src>', '<image>'], a: 0 },
-      { q: 'What is the correct CSS syntax?', options: ['body: color=red;', 'body { color: red; }', '{body: red}', 'body(color:red)'], a: 1 },
-      { q: 'Which attribute is required for accessibility in images?', options: ['title', 'alt', 'srcset', 'width'], a: 1 },
-      { q: 'How do you link a stylesheet?', options: ['<style href="style.css">', '<link rel="stylesheet" href="style.css">', '<css src="style.css">', '<script src="style.css">'], a: 1 },
-      { q: 'Which is semantic HTML?', options: ['<div>', '<section>', '<span>', '<b>'], a: 1 },
-      { q: 'What does display: flex do?', options: ['Adds animation', 'Creates a flex formatting context', 'Hides elements', 'Adds margins'], a: 1 },
-      { q: 'Best way to make layouts mobile-friendly?', options: ['Fixed width only', 'Media queries', 'Table layouts', 'Inline styles only'], a: 1 }
-    ]
-  },
-  JavaScript: {
-    notes: [
-      'JavaScript adds behavior and interactivity to websites.',
-      'Use variables to store data and functions to organize logic.',
-      'Events like click and input help you react to user actions.',
-      'Mini task: Build a button that updates a counter on each click.',
-      'Common mistakes: forgetting to handle null elements and global variable leaks.'
-    ],
-    videos: ['https://www.youtube.com/embed/W6NZfCO5SIk'],
-    practiceTask: 'Build a search input with live filtering for a list of tasks.',
-    quiz: Array.from({ length: 10 }).map((_, i) => ({
-      q: `JavaScript Quick Check ${i + 1}: Which keyword declares a block-scoped variable?`,
-      options: ['var', 'let', 'const', 'function'],
-      a: i % 2 === 0 ? 1 : 2
-    }))
-  },
-  React: {
-    notes: [
-      'React is a library for building component-based UIs.',
-      'Components receive props and can manage state for dynamic behavior.',
-      'Keep components small and reusable for maintainability.',
-      'Mini task: Build a profile card component with props for name and role.',
-      'Common mistakes: mutating state directly and missing list keys.'
-    ],
-    videos: ['https://www.youtube.com/embed/bMknfKXIFA8'],
-    practiceTask: 'Create a reusable card component and render at least 3 cards from data.',
-    quiz: Array.from({ length: 10 }).map((_, i) => ({
-      q: `React Check ${i + 1}: State updates should be...`,
-      options: ['Mutated directly', 'Immutable', 'Synchronous always', 'Stored in CSS'],
-      a: 1
-    }))
-  },
-  'UI/UX Design': {
-    notes: [
-      'UI focuses on visual design, UX focuses on usability and flow.',
-      'Hierarchy, spacing, and contrast improve readability.',
-      'Prototype early and test with users to spot friction points.',
-      'Mini task: Design a clean sign-up form with clear labels.',
-      'Common mistakes: too many colors and inconsistent spacing patterns.'
-    ],
-    videos: ['https://www.youtube.com/embed/c9Wg6Cb_YlU'],
-    practiceTask: 'Design a dashboard card set with consistent spacing and typography scale.',
-    quiz: Array.from({ length: 10 }).map((_, i) => ({
-      q: `UI/UX Check ${i + 1}: Good UX primarily means...`,
-      options: ['Many animations', 'Easy and intuitive tasks', 'Complex navigation', 'High saturation colors'],
-      a: 1
-    }))
-  },
-  Python: {
-    notes: [
-      'Python is beginner-friendly and often used for backend and data tasks.',
-      'Indentation defines code blocks, so keep spacing consistent.',
-      'Use functions to avoid repetitive code and improve readability.',
-      'Mini task: Read a list and print only values greater than 10.',
-      'Common mistakes: indentation errors and mixing string/int types.'
-    ],
-    videos: ['https://www.youtube.com/embed/_uQrJ0TkZlc'],
-    practiceTask: 'Write a Python function that validates email format using simple checks.',
-    quiz: Array.from({ length: 10 }).map((_, i) => ({
-      q: `Python Check ${i + 1}: Which symbol starts a comment line?`,
-      options: ['//', '#', '--', '/*'],
-      a: 1
-    }))
-  }
-};
-
-const notifications = [
-  'New gig: React dashboard fix posted by DashForge.',
-  'Your HTML & CSS badge is now visible to recruiters.',
-  'Practice streak unlocked: 3-day consistency.',
-  'You have 2 unread messages from clients.'
-];
-
-const chatbotHints = [
-  'Suggest a 7-day plan to learn JavaScript basics.',
-  'Show gigs I can apply for with HTML & CSS.',
-  'How can I improve my profile conversion rate?'
-];
-
 import { gigs, learningTracks, notifications, chatbotHints } from '../data/mockData.js';
+
+const STORAGE_TOKEN_KEY = 'skillbridgeToken';
+const STORAGE_PROGRESS_KEY = 'skillbridgeProgress';
 
 const state = {
   page: 'dashboard',
@@ -215,10 +13,20 @@ const state = {
   badges: { 'HTML & CSS': 'Beginner' },
   currentLearningSkill: 'HTML & CSS',
   currentQuizAnswers: {},
+  currentQuizSet: [],
   darkMode: false,
   xp: 120,
   streak: 4,
-  selectedGig: null
+  selectedGig: null,
+  completedGigs: 0,
+  completedCourses: 1,
+  activeDays: 1,
+  activeDates: new Set(),
+  lastActiveDate: '',
+  learningActivityLog: {},
+  calendarMonthOffset: 0,
+  token: '',
+  userName: 'Guest User'
 };
 
 const els = {
@@ -231,6 +39,7 @@ const els = {
   sidebarOverlay: document.getElementById('sidebar-overlay'),
   pageTitle: document.getElementById('page-title'),
   navLinks: document.querySelectorAll('[data-nav]'),
+  topNavLinks: document.querySelectorAll('.top-nav__link[data-nav]'),
   pageSections: document.querySelectorAll('[data-page]'),
   gigsGrid: document.getElementById('gigs-grid'),
   noGigs: document.getElementById('empty-gigs'),
@@ -272,17 +81,84 @@ const els = {
   statUsers: document.getElementById('stat-users'),
   statGigs: document.getElementById('stat-gigs'),
   statXP: document.getElementById('xp-value'),
-  statStreak: document.getElementById('streak-value')
+  statStreak: document.getElementById('streak-value'),
+  statCompletedGigs: document.getElementById('stat-completed-gigs'),
+  statCompletedCourses: document.getElementById('stat-completed-courses'),
+  statActiveDays: document.getElementById('stat-active-days'),
+  calendarWrap: document.getElementById('active-days-calendar'),
+  calendarMonthLabel: document.getElementById('calendar-month-label'),
+  calendarPrevBtn: document.getElementById('calendar-prev'),
+  calendarNextBtn: document.getElementById('calendar-next'),
+  topNavLogin: document.getElementById('top-nav-login'),
+  topNavSignup: document.getElementById('top-nav-signup'),
+  topNavUserMenu: document.getElementById('top-nav-user-menu'),
+  topNavUserChip: document.getElementById('top-nav-user-chip'),
+  topNavUserDropdown: document.getElementById('top-nav-user-dropdown'),
+  topNavUserLogout: document.getElementById('top-nav-user-logout'),
+  sidebarUserName: document.getElementById('sidebar-user-name'),
+  sidebarUserRole: document.getElementById('sidebar-user-role'),
+  profileUserName: document.getElementById('profile-user-name')
 };
 
-const typingWords = ['Learn', 'Practice', 'Verify', 'Earn'];
+const typingWords = ['Learn....', 'Practice....', 'Verify....', 'Earn!!!'];
 let typeWordIndex = 0;
 let typeCharIndex = 0;
 let deleting = false;
+let heroWordTimer = null;
 
-function init() {
+async function init() {
   bindEvents();
+  loadLocalProgress();
+  await restoreSession();
+  trackDailyActivity();
   fakeBoot();
+  
+  // Check if user is authenticated
+  if (state.token) {
+    // User is logged in - show user dashboard
+    showUserDashboard();
+  } else {
+    // User is not logged in - show landing page
+    showLandingPage();
+  }
+}
+
+function showLandingPage() {
+  const landingSection = document.getElementById('page-landing');
+  const userPageHeader = document.getElementById('user-page-header');
+  const userDashboard = document.getElementById('page-dashboard');
+  const layout = document.querySelector('.layout');
+
+  // Show landing, hide user content
+  if (landingSection) {
+    landingSection.removeAttribute('hidden');
+    landingSection.classList.add('page-section--active');
+  }
+  if (userPageHeader) userPageHeader.setAttribute('hidden', '');
+  if (userDashboard) userDashboard.setAttribute('hidden', '');
+  if (layout) layout.classList.add('layout--full');
+  els.pageSections.forEach((section) => section.classList.remove('page-section--active'));
+  
+  // Update top-nav to show auth buttons only
+  updateTopNavForGuest();
+}
+
+function showUserDashboard() {
+  const landingSection = document.getElementById('page-landing');
+  const userPageHeader = document.getElementById('user-page-header');
+  const userDashboard = document.getElementById('page-dashboard');
+  const layout = document.querySelector('.layout');
+
+  // Show user content, hide landing
+  if (landingSection) landingSection.setAttribute('hidden', '');
+  if (userPageHeader) userPageHeader.removeAttribute('hidden');
+  if (userDashboard) userDashboard.removeAttribute('hidden');
+  if (layout) layout.classList.remove('layout--full');
+
+  // Show auth info in top-nav
+  updateTopNavForUser();
+
+  // Initialize user dashboard
   renderNotifications();
   renderSkillSelect();
   renderSkillProgress();
@@ -296,31 +172,72 @@ function init() {
   renderChatHints();
   startTypingHeadline();
   syncGamification();
+  updateDashboardStats();
+  renderActiveDaysCalendar();
+  navigate('dashboard');
+}
+
+function updateTopNavForGuest() {
+  els.topNavLinks.forEach((link) => {
+    link.style.display = 'none';
+  });
+  if (els.topNavLogin) els.topNavLogin.hidden = false;
+  if (els.topNavSignup) els.topNavSignup.hidden = false;
+  if (els.topNavUserMenu) els.topNavUserMenu.hidden = true;
+  if (els.topNavUserDropdown) els.topNavUserDropdown.classList.remove('user-menu__dropdown--active');
+}
+
+function updateTopNavForUser() {
+  els.topNavLinks.forEach((link) => {
+    link.style.display = 'inline-block';
+  });
+  if (els.topNavLogin) els.topNavLogin.hidden = true;
+  if (els.topNavSignup) els.topNavSignup.hidden = true;
+  if (els.topNavUserMenu) els.topNavUserMenu.hidden = false;
+  if (els.topNavUserChip) {
+    els.topNavUserChip.textContent = state.userName;
+  }
+}
+
+function performLogout() {
+  localStorage.removeItem(STORAGE_TOKEN_KEY);
+  state.token = '';
+  state.userName = 'Guest User';
+  if (els.topNavUserDropdown) els.topNavUserDropdown.classList.remove('user-menu__dropdown--active');
+  showToast('Logged out successfully.', 'success');
+  renderUserIdentity();
+  showLandingPage();
+}
+
+function renderUserIdentity() {
+  if (els.sidebarUserName) {
+    els.sidebarUserName.textContent = state.userName || 'Guest User';
+  }
+  if (els.sidebarUserRole) {
+    els.sidebarUserRole.textContent = state.token ? 'Logged In Member' : 'Verified Freelancer';
+  }
+  if (els.profileUserName) {
+    els.profileUserName.textContent = state.userName || 'Guest User';
+  }
+  if (state.token) {
+    updateTopNavForUser();
+  } else {
+    updateTopNavForGuest();
+  }
 }
 
 function fakeBoot() {
   setTimeout(() => {
     els.loader.classList.add('loading-screen--done');
     els.app.removeAttribute('hidden');
-    showToast('Welcome back! SkillBridge is ready.', 'success');
+    const message = state.token ? 'Welcome back! SkillBridge is ready.' : 'Welcome to SkillBridge. Learn. Verify. Earn.';
+    showToast(message, 'success');
   }, 1200);
 }
 
 function bindEvents() {
   window.addEventListener('scroll', () => {
     els.nav.classList.toggle('top-nav--shrink', window.scrollY > 24);
-  });
-
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-      const targetId = anchor.getAttribute('href');
-      if (!targetId || targetId === '#') return;
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
   });
 
   document.querySelectorAll('[data-ripple]').forEach((btn) => {
@@ -345,6 +262,38 @@ function bindEvents() {
 
   document.getElementById('btn-find-work').addEventListener('click', () => navigate('gigs'));
   document.getElementById('btn-start-learning-hero').addEventListener('click', () => navigate('learn'));
+
+  const logoutBtn = document.getElementById('btn-logout');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', performLogout);
+  }
+
+  if (els.topNavUserChip) {
+    els.topNavUserChip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (els.topNavUserDropdown) {
+        els.topNavUserDropdown.classList.toggle('user-menu__dropdown--active');
+      }
+    });
+  }
+
+  if (els.topNavUserLogout) {
+    els.topNavUserLogout.addEventListener('click', performLogout);
+  }
+
+  if (els.calendarPrevBtn) {
+    els.calendarPrevBtn.addEventListener('click', () => {
+      state.calendarMonthOffset -= 1;
+      renderActiveDaysCalendar();
+    });
+  }
+
+  if (els.calendarNextBtn) {
+    els.calendarNextBtn.addEventListener('click', () => {
+      state.calendarMonthOffset += 1;
+      renderActiveDaysCalendar();
+    });
+  }
 
   document.querySelectorAll('[data-open-auth]').forEach((btn) => {
     btn.addEventListener('click', () => openAuth('login'));
@@ -402,6 +351,9 @@ function bindEvents() {
     if (!e.target.closest('.notification-center')) {
       els.notificationsDropdown.classList.remove('notification-dropdown--active');
     }
+    if (!e.target.closest('.user-menu') && els.topNavUserDropdown) {
+      els.topNavUserDropdown.classList.remove('user-menu__dropdown--active');
+    }
   });
 
   els.learnSkillSelect.addEventListener('change', (e) => {
@@ -450,9 +402,17 @@ function navigate(page) {
   els.pageSections.forEach((section) => {
     section.classList.toggle('page-section--active', section.id === `page-${page}`);
   });
+
   els.navLinks.forEach((link) => {
-    link.classList.toggle('sidebar-link--active', link.dataset.nav === page);
+    if (link.classList.contains('sidebar-link')) {
+      link.classList.toggle('sidebar-link--active', link.dataset.nav === page);
+    }
   });
+
+  els.topNavLinks.forEach((link) => {
+    link.classList.toggle('top-nav__link--active', link.dataset.nav === page);
+  });
+
   els.pageTitle.textContent = page.charAt(0).toUpperCase() + page.slice(1);
 }
 
@@ -569,10 +529,14 @@ function openGigModal(id) {
 
   const applyBtn = document.getElementById('modal-apply');
   if (applyBtn) {
-    applyBtn.addEventListener('click', () => {
+    applyBtn.addEventListener('click', async () => {
       closeGigModal();
-      showToast('Application submitted successfully.', 'success');
+      state.completedGigs += 1;
       gainXP(15);
+      updateDashboardStats();
+      persistProgress();
+      await syncRemoteActivity();
+      showToast('Application submitted successfully.', 'success');
     });
   }
 
@@ -588,11 +552,107 @@ function renderSkillSelect() {
   els.learnSkillSelect.innerHTML = skills.map((skill) => `<option value="${skill}">${skill}</option>`).join('');
 }
 
+function hashString(value) {
+  let hash = 2166136261;
+  for (let i = 0; i < value.length; i += 1) {
+    hash ^= value.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function mulberry32(seed) {
+  let t = seed;
+  return function rand() {
+    t += 0x6d2b79f5;
+    let r = Math.imul(t ^ (t >>> 15), 1 | t);
+    r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+    return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function seededShuffle(items, randomFn) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(randomFn() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function buildFallbackQuestion(skill, index) {
+  return {
+    q: `${skill} Mandatory Question ${index + 1}: Select the correct statement for this course topic.`,
+    options: ['Incorrect concept', 'Partially correct', 'Correct best-practice statement', 'Unrelated statement'],
+    a: 2
+  };
+}
+
+function normalizeQuestion(raw) {
+  const baseOptions = Array.isArray(raw.options) ? [...raw.options] : [];
+  while (baseOptions.length < 4) {
+    baseOptions.push(`Option ${baseOptions.length + 1}`);
+  }
+
+  const optionPairs = baseOptions.map((text, idx) => ({ text, isAnswer: idx === raw.a }));
+  const shuffledPairs = seededShuffle(optionPairs, Math.random);
+  const answerIndex = shuffledPairs.findIndex((item) => item.isAnswer);
+
+  return {
+    q: raw.q,
+    options: shuffledPairs.map((item) => item.text),
+    a: answerIndex < 0 ? 0 : answerIndex
+  };
+}
+
+function buildUserQuizSet(skill, quizPool) {
+  const source = Array.isArray(quizPool) ? [...quizPool] : [];
+  const userSeedKey = `${state.userName || 'Guest User'}|${skill}`;
+  const random = mulberry32(hashString(userSeedKey));
+
+  let ordered = seededShuffle(source, random);
+  if (ordered.length < 10) {
+    const missing = 10 - ordered.length;
+    for (let i = 0; i < missing; i += 1) {
+      ordered.push(buildFallbackQuestion(skill, ordered.length));
+    }
+  }
+
+  const normalized = ordered.slice(0, 10).map((q) => normalizeQuestion(q));
+
+  if (normalized.length < 10) {
+    const missing = 10 - normalized.length;
+    for (let i = 0; i < missing; i += 1) {
+      normalized.push(normalizeQuestion(buildFallbackQuestion(skill, i)));
+    }
+  }
+
+  return normalized.slice(0, 10);
+}
+
+function rewardLearningXP(skill) {
+  const today = new Date().toISOString().slice(0, 10);
+  const key = `${today}:${skill}`;
+  if (state.learningActivityLog[key]) return;
+  state.learningActivityLog[key] = true;
+  gainXP(10);
+  persistProgress();
+  syncRemoteActivity();
+}
+
 function renderLearningModule(skill) {
   const track = learningTracks[skill];
   if (!track) return;
 
+  rewardLearningXP(skill);
+
   state.currentQuizAnswers = {};
+  state.currentQuizSet = buildUserQuizSet(skill, track.quiz);
+  if (!Array.isArray(state.currentQuizSet) || state.currentQuizSet.length !== 10) {
+    state.currentQuizSet = Array.from({ length: 10 }).map((_, idx) =>
+      normalizeQuestion(buildFallbackQuestion(skill, idx))
+    );
+  }
   els.quizResult.textContent = '';
   els.badgeWrap.textContent = '';
 
@@ -609,7 +669,7 @@ function renderLearningModule(skill) {
     .join('');
   els.practiceTask.textContent = track.practiceTask;
 
-  els.quizWrap.innerHTML = track.quiz
+  els.quizWrap.innerHTML = state.currentQuizSet
     .map(
       (item, idx) => `
       <div class="quiz-item">
@@ -630,35 +690,90 @@ function renderLearningModule(skill) {
     `
     )
     .join('');
+
+  const renderedCount = els.quizWrap.querySelectorAll('.quiz-item').length;
+  if (renderedCount !== 10) {
+    const fallbackSet = Array.from({ length: 10 }).map((_, idx) => normalizeQuestion(buildFallbackQuestion(skill, idx)));
+    state.currentQuizSet = fallbackSet;
+    els.quizWrap.innerHTML = fallbackSet
+      .map(
+        (item, idx) => `
+        <div class="quiz-item">
+          <p>${idx + 1}. ${item.q}</p>
+          <div class="quiz-options">
+            ${item.options
+              .map(
+                (option, optionIndex) => `
+              <label>
+                <input type="radio" name="q-${idx}" value="${optionIndex}" />
+                <span>${option}</span>
+              </label>
+            `
+              )
+              .join('')}
+          </div>
+        </div>
+      `
+      )
+      .join('');
+  }
 }
 
-function submitQuiz() {
+async function submitQuiz() {
   const skill = state.currentLearningSkill;
-  const track = learningTracks[skill];
-  if (!track) return;
+  const quizSet = state.currentQuizSet;
+  if (!Array.isArray(quizSet) || quizSet.length !== 10) {
+    showToast('Quiz setup issue detected. Please reload the course module.', 'warning');
+    return;
+  }
+
+  let answered = 0;
+  for (let idx = 0; idx < 10; idx += 1) {
+    const checked = document.querySelector(`input[name="q-${idx}"]:checked`);
+    if (checked) answered += 1;
+  }
+
+  if (answered < 10) {
+    els.quizResult.textContent = `All 10 questions are compulsory. Please answer all questions before submitting.`;
+    els.quizResult.className = 'quiz-result quiz-result--fail';
+    showToast('All 10 questions are compulsory.', 'warning');
+    return;
+  }
 
   let score = 0;
-  track.quiz.forEach((q, idx) => {
+  quizSet.forEach((q, idx) => {
     const checked = document.querySelector(`input[name="q-${idx}"]:checked`);
     if (checked && Number(checked.value) === q.a) score += 1;
   });
 
   if (score >= 7) {
+    const wasCompleted = state.completedSkills.has(skill);
     state.completedSkills.add(skill);
     const level = score >= 9 ? 'Verified' : score >= 8 ? 'Intermediate' : 'Beginner';
     state.badges[skill] = level;
-    els.quizResult.textContent = `You scored ${score}/10. Passed!`;
+
+    if (!wasCompleted) {
+      state.completedCourses += 1;
+    }
+
+    els.quizResult.textContent = `You scored ${score}/10. Course completed successfully.`;
     els.quizResult.className = 'quiz-result quiz-result--pass';
-    els.badgeWrap.textContent = `You earned ${skill} ${level} Badge!`;
-    showToast(`Badge unlocked: ${skill} ${level}`, 'success');
-    gainXP(40);
+    els.badgeWrap.textContent = `You earned ${skill} ${level} Badge. Redirecting to gigs...`;
+    showToast('Successfully completed the course. Moving to gigs.', 'success');
+    gainXP(80);
     renderSkillProgress();
     renderRecommendations(skill);
     renderGigs();
+    updateDashboardStats();
+    persistProgress();
+    await syncRemoteActivity();
+    setTimeout(() => {
+      navigate('gigs');
+    }, 900);
   } else {
-    els.quizResult.textContent = `You scored ${score}/10. You need 7/10 to pass.`;
+    els.quizResult.textContent = `You scored ${score}/10. You have not passed the course. Make sure to complete the course again and get back.`;
     els.quizResult.className = 'quiz-result quiz-result--fail';
-    showToast('Keep practicing and retry the quiz.', 'warning');
+    showToast('You have not passed the course. Complete it again and come back.', 'warning');
   }
 }
 
@@ -775,8 +890,12 @@ function animateCount(el, target, suffix) {
 
 function startTypingHeadline() {
   if (!els.heroTyped) return;
-  const current = typingWords[typeWordIndex];
+  if (heroWordTimer) {
+    clearTimeout(heroWordTimer);
+    heroWordTimer = null;
+  }
 
+  const current = typingWords[typeWordIndex % typingWords.length];
   if (!deleting) {
     typeCharIndex += 1;
   } else {
@@ -785,18 +904,17 @@ function startTypingHeadline() {
 
   els.heroTyped.textContent = current.slice(0, typeCharIndex);
 
-  let timeout = deleting ? 70 : 120;
-
+  let delay = deleting ? 70 : 120;
   if (!deleting && typeCharIndex === current.length) {
-    timeout = 900;
     deleting = true;
+    delay = 850;
   } else if (deleting && typeCharIndex === 0) {
     deleting = false;
     typeWordIndex = (typeWordIndex + 1) % typingWords.length;
-    timeout = 250;
+    delay = 260;
   }
 
-  setTimeout(startTypingHeadline, timeout);
+  heroWordTimer = setTimeout(startTypingHeadline, delay);
 }
 
 function initRevealAnimation() {
@@ -853,7 +971,7 @@ function closeAuth() {
   els.authModal.classList.remove('auth-modal--active');
 }
 
-function handleAuthSubmit(e) {
+async function handleAuthSubmit(e) {
   e.preventDefault();
   const name = document.getElementById('auth-name').value.trim();
   const email = document.getElementById('auth-email').value.trim();
@@ -881,8 +999,20 @@ function handleAuthSubmit(e) {
 
   if (hasError) return;
 
-  showToast(mode === 'signup' ? 'Account created. Welcome to SkillBridge!' : 'Logged in successfully.', 'success');
-  closeAuth();
+  try {
+    const endpoint = mode === 'signup' ? '/api/auth/signup' : '/api/auth/login';
+    const payload = mode === 'signup' ? { name, email, password } : { email, password };
+    const response = await apiRequest(endpoint, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+
+    applySession(response.token, response.user);
+    closeAuth();
+    showToast(mode === 'signup' ? 'Account created. Welcome to SkillBridge!' : 'Logged in successfully.', 'success');
+  } catch (error) {
+    showToast(error.message || 'Authentication failed.', 'warning');
+  }
 }
 
 function setFieldError(id, message) {
@@ -960,6 +1090,219 @@ function syncGamification() {
   els.statStreak.textContent = state.streak;
 }
 
+function updateDashboardStats() {
+  els.statCompletedGigs.textContent = String(state.completedGigs);
+  els.statCompletedCourses.textContent = String(state.completedCourses);
+  els.statActiveDays.textContent = String(state.activeDays);
+}
+
+function renderActiveDaysCalendar() {
+  if (!els.calendarWrap || !els.calendarMonthLabel) return;
+
+  const now = new Date();
+  const viewDate = new Date(now.getFullYear(), now.getMonth() + state.calendarMonthOffset, 1);
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+  const firstWeekday = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const todayIso = new Date().toISOString().slice(0, 10);
+
+  els.calendarMonthLabel.textContent = viewDate.toLocaleString('en-US', {
+    month: 'long',
+    year: 'numeric'
+  });
+
+  const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const cells = [];
+  weekdays.forEach((day) => {
+    cells.push(`<div class="activity-calendar__weekday">${day}</div>`);
+  });
+
+  for (let i = 0; i < firstWeekday; i += 1) {
+    cells.push('<div class="activity-calendar__blank"></div>');
+  }
+
+  for (let day = 1; day <= daysInMonth; day += 1) {
+    const iso = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const isActive = state.activeDates.has(iso);
+    const isToday = iso === todayIso;
+    const cls = [
+      'activity-calendar__day',
+      isActive ? 'activity-calendar__day--active' : '',
+      isToday ? 'activity-calendar__day--today' : ''
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+    cells.push(`<div class="${cls}" title="${isActive ? 'Active day' : 'Inactive day'}">${day}</div>`);
+  }
+
+  els.calendarWrap.innerHTML = cells.join('');
+}
+
+function trackDailyActivity() {
+  const today = new Date().toISOString().slice(0, 10);
+  if (!state.activeDates.has(today)) {
+    state.activeDates.add(today);
+    state.activeDays = state.activeDates.size;
+    state.lastActiveDate = today;
+    gainXP(15);
+    updateDashboardStats();
+    renderActiveDaysCalendar();
+    persistProgress();
+    syncRemoteActivity();
+  }
+}
+
+function loadLocalProgress() {
+  const raw = localStorage.getItem(STORAGE_PROGRESS_KEY);
+  if (!raw) {
+    state.lastActiveDate = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    return;
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed.completedSkills)) state.completedSkills = new Set(parsed.completedSkills);
+    if (parsed.badges && typeof parsed.badges === 'object') state.badges = parsed.badges;
+    if (Number.isFinite(parsed.xp)) state.xp = parsed.xp;
+    if (Number.isFinite(parsed.streak)) state.streak = parsed.streak;
+    if (Number.isFinite(parsed.completedGigs)) state.completedGigs = parsed.completedGigs;
+    if (Number.isFinite(parsed.completedCourses)) state.completedCourses = parsed.completedCourses;
+    if (Number.isFinite(parsed.activeDays)) state.activeDays = parsed.activeDays;
+    if (Array.isArray(parsed.activeDates)) state.activeDates = new Set(parsed.activeDates);
+    if (typeof parsed.lastActiveDate === 'string') state.lastActiveDate = parsed.lastActiveDate;
+    if (parsed.learningActivityLog && typeof parsed.learningActivityLog === 'object') {
+      state.learningActivityLog = parsed.learningActivityLog;
+    }
+  } catch {
+    state.lastActiveDate = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  }
+
+  if (!state.activeDates.size && state.lastActiveDate) {
+    state.activeDates.add(state.lastActiveDate);
+  }
+  if (state.activeDates.size) {
+    state.activeDays = state.activeDates.size;
+  }
+}
+
+function persistProgress() {
+  localStorage.setItem(
+    STORAGE_PROGRESS_KEY,
+    JSON.stringify({
+      completedSkills: Array.from(state.completedSkills),
+      badges: state.badges,
+      xp: state.xp,
+      streak: state.streak,
+      completedGigs: state.completedGigs,
+      completedCourses: state.completedCourses,
+      activeDays: state.activeDays,
+      activeDates: Array.from(state.activeDates),
+      learningActivityLog: state.learningActivityLog,
+      lastActiveDate: state.lastActiveDate
+    })
+  );
+}
+
+function applySession(token, user) {
+  state.token = token;
+  localStorage.setItem(STORAGE_TOKEN_KEY, token);
+  applyUserPayload(user);
+  showUserDashboard();
+}
+
+function applyUserPayload(user) {
+  if (!user) return;
+  state.userName = (user.name || user.email || 'Guest User').trim();
+  state.completedSkills = new Set(user.completedSkills || []);
+  state.badges = user.badges || {};
+  state.xp = Number.isFinite(user.xp) ? user.xp : state.xp;
+  state.streak = Number.isFinite(user.streak) ? user.streak : state.streak;
+  state.completedGigs = Number.isFinite(user.completedGigs) ? user.completedGigs : state.completedGigs;
+  state.completedCourses = Number.isFinite(user.completedCourses) ? user.completedCourses : state.completedCourses;
+  state.activeDays = Number.isFinite(user.activeDays) ? user.activeDays : state.activeDays;
+  state.activeDates = new Set(Array.isArray(user.activeDates) ? user.activeDates : []);
+  state.lastActiveDate = user.lastActiveDate || state.lastActiveDate;
+
+  if (!state.activeDates.size && state.lastActiveDate) {
+    state.activeDates.add(state.lastActiveDate);
+  }
+  if (state.activeDates.size) {
+    state.activeDays = state.activeDates.size;
+  }
+
+  renderSkillProgress();
+  renderGigs();
+  renderRecommendations();
+  syncGamification();
+  updateDashboardStats();
+  renderActiveDaysCalendar();
+  persistProgress();
+  renderUserIdentity();
+}
+
+async function restoreSession() {
+  const token = localStorage.getItem(STORAGE_TOKEN_KEY);
+  if (!token) return;
+  state.token = token;
+
+  try {
+    const res = await apiRequest('/api/activity/me');
+    applyUserPayload(res.user);
+  } catch {
+    localStorage.removeItem(STORAGE_TOKEN_KEY);
+    state.token = '';
+  }
+}
+
+async function syncRemoteActivity() {
+  if (!state.token) return;
+  try {
+    const res = await apiRequest('/api/activity/sync', {
+      method: 'POST',
+      body: JSON.stringify({
+        completedSkills: Array.from(state.completedSkills),
+        badges: state.badges,
+        xp: state.xp,
+        streak: state.streak,
+        completedGigs: state.completedGigs,
+        completedCourses: state.completedCourses,
+        activeDays: state.activeDays,
+        activeDates: Array.from(state.activeDates),
+        lastActiveDate: state.lastActiveDate
+      })
+    });
+    applyUserPayload(res.user);
+  } catch {
+    // Keep local state if backend sync fails.
+  }
+}
+
+async function apiRequest(url, options = {}) {
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(options.headers || {})
+  };
+
+  if (state.token) {
+    headers.Authorization = `Bearer ${state.token}`;
+  }
+
+  const response = await fetch(url, {
+    ...options,
+    headers
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.message || 'Request failed');
+  }
+
+  return data;
+}
+
 function startVoiceSearch() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRecognition) {
@@ -986,4 +1329,6 @@ function startVoiceSearch() {
   recognition.start();
 }
 
-init();
+init().catch(() => {
+  showToast('Initialization failed. Please refresh.', 'warning');
+});
