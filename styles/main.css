@@ -1544,3 +1544,60 @@ input[type='checkbox'] {
     grid-template-columns: 1fr;
   }
 }
+
+/* Admin Dashboard Badge Styles */
+.badge {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge--pending {
+  background: rgba(216, 67, 67, 0.12);
+  color: #d84343;
+  border: 1px solid rgba(216, 67, 67, 0.3);
+}
+
+.badge--approved {
+  background: rgba(30, 142, 90, 0.12);
+  color: #0f7048;
+  border: 1px solid rgba(30, 142, 90, 0.3);
+}
+
+.badge--rejected {
+  background: rgba(127, 127, 127, 0.12);
+  color: #666;
+  border: 1px solid rgba(127, 127, 127, 0.3);
+}
+
+.btn--destructive {
+  background: #d84343;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(216, 67, 67, 0.28);
+}
+
+.btn--destructive:hover {
+  background: #c72e2e;
+  transform: translateY(-2px);
+}
+
+/* Admin dashboard specific CSS variables for styling */
+:root {
+  --text-secondary: #5f6c63;
+  --text-tertiary: #8b9993;
+  --card-bg: #ffffff;
+  --border-color: #dce4d4;
+  --success: #0f7048;
+  --destructive: #d84343;
+}
+
+body.theme-dark {
+  --text-secondary: #a8bbb0;
+  --text-tertiary: #809985;
+  --card-bg: #141e19;
+  --border-color: #24342b;
+}

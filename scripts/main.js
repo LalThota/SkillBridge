@@ -1,4 +1,4 @@
-import { gigs, learningTracks, notifications, chatbotHints } from '../data/mockData.js';
+import { gigs, learningTracks, notifications, chatbotHints, companyGigs } from '../data/mockData.js';
 
 const STORAGE_TOKEN_KEY = 'skillbridgeToken';
 const STORAGE_PROGRESS_KEY = 'skillbridgeProgress';
@@ -30,7 +30,8 @@ const state = {
   learningActivityLog: {},
   calendarMonthOffset: 0,
   token: '',
-  userName: 'Guest User'
+  userName: 'Guest User',
+  isAdmin: false
 };
 
 const els = {
@@ -235,13 +236,29 @@ function updateTopNavForUser() {
   }
 }
 
+function showAdminNav() {
+  const adminLink = document.getElementById('admin-nav-link');
+  if (adminLink && state.isAdmin) {
+    adminLink.hidden = false;
+  }
+}
+
+function hideAdminNav() {
+  const adminLink = document.getElementById('admin-nav-link');
+  if (adminLink) {
+    adminLink.hidden = true;
+  }
+}
+
 function performLogout() {
   localStorage.removeItem(STORAGE_TOKEN_KEY);
   state.token = '';
+  state.isAdmin = false;
   state.userName = 'Guest User';
   if (els.topNavUserDropdown) els.topNavUserDropdown.classList.remove('user-menu__dropdown--active');
   showToast('Logged out successfully.', 'success');
   renderUserIdentity();
+  hideAdminNav();
   showLandingPage();
 }
 
@@ -461,6 +478,12 @@ function navigate(page) {
   });
 
   els.pageTitle.textContent = page.charAt(0).toUpperCase() + page.slice(1);
+
+  // Handle admin page rendering
+  if (page === 'admin') {
+    renderAdminDashboard('all');
+    setupAdminFilterListeners();
+  }
 }
 
 function closeSidebar() {
@@ -915,6 +938,159 @@ function getBotReply(text) {
   return 'I can help with learning plans, gig matching, profile optimization, and interview preparation.';
 }
 
+function renderAdminDashboard(filterStatus = 'all') {
+  const adminPage = document.getElementById('page-admin');
+  if (!adminPage) return;
+
+  let filteredGigs = companyGigs;
+  if (filterStatus !== 'all') {
+    filteredGigs = companyGigs.filter((gig) => gig.status === filterStatus);
+  }
+
+  // Update stats
+  const pendingCount = companyGigs.filter((g) => g.status === 'pending').length;
+  const approvedCount = companyGigs.filter((g) => g.status === 'approved').length;
+  const el = document.getElementById('admin-pending-count');
+  if (el) el.textContent = pendingCount;
+  const el2 = document.getElementById('admin-approved-count');
+  if (el2) el2.textContent = approvedCount;
+
+  // Group by company
+  const byCompany = {};
+  filteredGigs.forEach((gig) => {
+    if (!byCompany[gig.company]) byCompany[gig.company] = [];
+    byCompany[gig.company].push(gig);
+  });
+
+  const listHtml = Object.entries(byCompany)
+    .map(
+      ([company, gigs]) => `
+    <div style="margin-bottom:28px;">
+      <h4 style="margin-bottom:12px; color:var(--text-secondary);">${company}</h4>
+      <div style="display:grid;gap:12px;">
+        ${gigs
+          .map(
+            (gig) => `
+          <article class="gig-card" style="padding:16px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <h4 style="margin-bottom:4px;">${gig.title}</h4>
+                <p style="font-size:0.85rem;color:var(--text-tertiary);">${gig.category} • ${gig.skill}</p>
+              </div>
+              <span class="badge badge--${gig.status}" style="font-size:0.75rem;">${gig.status.toUpperCase()}</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;font-size:0.9rem;">
+              <div><strong style="color:var(--accent);">₹${gig.price.toLocaleString()}</strong><p style="color:var(--text-tertiary);">Budget</p></div>
+              <div><strong>${gig.hours}</strong><p style="color:var(--text-tertiary);">Duration</p></div>
+            </div>
+            <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:12px;line-height:1.4;">${gig.description}</p>
+            <div style="display:flex;gap:8px;">
+              ${gig.status === 'pending' ? `
+                <button class="btn btn--primary admin-approve-btn" data-gig-id="${gig.id}" data-ripple style="flex:1;">Approve</button>
+                <button class="btn btn--destructive admin-reject-btn" data-gig-id="${gig.id}" data-ripple style="flex:1;">Reject</button>
+              ` : gig.status === 'rejected' ? `
+                <p style="color:var(--destructive);font-size:0.9rem;"><strong>Reason:</strong> ${gig.rejectionReason || 'Not specified'}</p>
+              ` : `
+                <p style="color:var(--success);font-size:0.9rem;"><strong>Approved:</strong> ${gig.approvedDate}</p>
+              `}
+            </div>
+          </article>
+        `
+          )
+          .join('')}
+      </div>
+    </div>
+  `
+    )
+    .join('');
+
+  const listEl = document.getElementById('admin-gigs-list');
+  if (listEl) {
+    listEl.innerHTML = listHtml || '<p style="text-align:center;color:var(--text-tertiary);">No gigs found</p>';
+  }
+
+  // Wire up action buttons
+  document.querySelectorAll('[data-gig-id]').forEach((btn) => {
+    if (btn.classList.contains('admin-approve-btn')) {
+      btn.removeEventListener('click', approveGigHandler);
+      btn.addEventListener('click', approveGigHandler);
+    }
+    if (btn.classList.contains('admin-reject-btn')) {
+      btn.removeEventListener('click', rejectGigHandler);
+      btn.addEventListener('click', rejectGigHandler);
+    }
+  });
+
+  // Update active filter button
+  document.querySelectorAll('[id^="admin-filter-"]').forEach((btn) => {
+    btn.style.opacity = '0.5';
+    const btnStatus = btn.id.replace('admin-filter-', '');
+    if (btnStatus === filterStatus) btn.style.opacity = '1';
+  });
+}
+
+function approveGigHandler(e) {
+  const gigId = Number(e.target.dataset.gigId);
+  approveGig(gigId);
+}
+
+function rejectGigHandler(e) {
+  const gigId = Number(e.target.dataset.gigId);
+  showRejectModal(gigId);
+}
+
+function approveGig(gigId) {
+  const gig = companyGigs.find((g) => g.id === gigId);
+  if (!gig) return;
+
+  gig.status = 'approved';
+  gig.approvedDate = new Date().toISOString().split('T')[0];
+  delete gig.rejectionReason;
+
+  // Add to main gigs list
+  const newGig = { ...gig, id: gig.id + 1000 };
+  gigs.push(newGig);
+
+  showToast(`✓ Gig "${gig.title}" approved and published!`);
+  renderAdminDashboard('all');
+  renderGigs();
+}
+
+function showRejectModal(gigId) {
+  const gig = companyGigs.find((g) => g.id === gigId);
+  if (!gig) return;
+
+  const reason = prompt(`Reject gig "${gig.title}"?\n\nEnter rejection reason (optional):`);
+  if (reason !== null) {
+    rejectGig(gigId, reason || 'No reason provided');
+  }
+}
+
+function rejectGig(gigId, reason = '') {
+  const gig = companyGigs.find((g) => g.id === gigId);
+  if (!gig) return;
+
+  gig.status = 'rejected';
+  gig.rejectionReason = reason;
+  delete gig.approvedDate;
+
+  showToast(`✗ Gig "${gig.title}" rejected`);
+  renderAdminDashboard('all');
+}
+
+function setupAdminFilterListeners() {
+  const filterButtons = document.querySelectorAll('[id^="admin-filter-"]');
+  filterButtons.forEach((btn) => {
+    btn.removeEventListener('click', adminFilterClickHandler);
+    btn.addEventListener('click', adminFilterClickHandler);
+  });
+}
+
+function adminFilterClickHandler(e) {
+  const filterType = e.target.id.replace('admin-filter-', '');
+  renderAdminDashboard(filterType);
+}
+
 function initCounters() {
   animateCount(els.statUsers, 500, '+');
   animateCount(els.statGigs, 50, '+');
@@ -1258,9 +1434,11 @@ function persistProgress() {
 
 function applySession(token, user) {
   state.token = token;
+  state.isAdmin = true;
   localStorage.setItem(STORAGE_TOKEN_KEY, token);
   applyUserPayload(user);
   showUserDashboard();
+  showAdminNav();
 }
 
 function applyUserPayload(user) {

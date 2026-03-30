@@ -202,3 +202,78 @@ export const chatbotHints = [
   'Show gigs I can apply for with HTML & CSS.',
   'How can I improve my profile conversion rate?'
 ];
+
+export const companyGigs = [
+  {
+    id: 101,
+    title: 'E-commerce Cart Page Development',
+    price: 45000,
+    category: 'Development',
+    skill: 'React',
+    level: 'Intermediate',
+    hours: '20-24 hrs',
+    company: 'ShopFlow',
+    description: 'Build a fully functional shopping cart with add/remove items, quantity controls, and checkout flow.',
+    requiredSkill: 'React',
+    status: 'pending',
+    submittedDate: '2026-03-28'
+  },
+  {
+    id: 102,
+    title: 'Logo Brand Identity Design',
+    price: 18000,
+    category: 'Design',
+    skill: 'UI/UX Design',
+    level: 'Beginner',
+    hours: '8-10 hrs',
+    company: 'BrandStudio',
+    description: 'Design a modern logo and brand color palette for a fintech startup.',
+    requiredSkill: 'UI/UX Design',
+    status: 'pending',
+    submittedDate: '2026-03-29'
+  },
+  {
+    id: 103,
+    title: 'API Documentation Writing',
+    price: 22000,
+    category: 'Writing',
+    skill: 'JavaScript',
+    level: 'Intermediate',
+    hours: '12-15 hrs',
+    company: 'CloudAPI Inc',
+    description: 'Write comprehensive API documentation with code examples and use cases.',
+    requiredSkill: 'JavaScript',
+    status: 'approved',
+    submittedDate: '2026-03-25',
+    approvedDate: '2026-03-27'
+  },
+  {
+    id: 104,
+    title: 'Database Schema Design',
+    price: 35000,
+    category: 'Data',
+    skill: 'Python',
+    level: 'Intermediate',
+    hours: '15-18 hrs',
+    company: 'DataVault',
+    description: 'Design and optimize database schema for a multi-tenant SaaS application.',
+    requiredSkill: 'Python',
+    status: 'rejected',
+    submittedDate: '2026-03-26',
+    rejectionReason: 'Scope too large for freelance project'
+  },
+  {
+    id: 105,
+    title: 'Mobile App UI Kit',
+    price: 38000,
+    category: 'Design',
+    skill: 'UI/UX Design',
+    level: 'Advanced',
+    hours: '25-30 hrs',
+    company: 'MobileStudio',
+    description: 'Create a comprehensive UI kit with 50+ components for iOS and Android.',
+    requiredSkill: 'UI/UX Design',
+    status: 'pending',
+    submittedDate: '2026-03-29'
+  }
+];

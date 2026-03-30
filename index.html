@@ -98,6 +98,7 @@
         <a href="#" class="sidebar-link" data-nav="messages">Messages</a>
         <a href="#" class="sidebar-link" data-nav="profile">Profile</a>
         <a href="#" class="sidebar-link" data-nav="settings">Settings</a>
+        <a href="#" class="sidebar-link" data-nav="admin" id="admin-nav-link" hidden>👨‍💼 Admin</a>
         <div class="sidebar-footer">
           <div><strong id="sidebar-user-name">Guest User</strong></div>
           <div id="sidebar-user-role">Verified Freelancer</div>
@@ -419,6 +420,35 @@
                 </label>
               </div>
             </div>
+          </article>
+        </section>
+
+        <!-- Admin Dashboard (for admin users) -->
+        <section class="page-section" id="page-admin" data-page hidden>
+          <div class="grid-2">
+            <article class="stat-card reveal">
+              <small>Pending Gigs</small>
+              <strong id="admin-pending-count">0</strong>
+              <p>Awaiting review and approval</p>
+            </article>
+            <article class="stat-card reveal">
+              <small>Approved Gigs</small>
+              <strong id="admin-approved-count">0</strong>
+              <p>Live and available to freelancers</p>
+            </article>
+          </div>
+
+          <article class="card reveal" style="margin-top:14px;">
+            <div class="card__head">
+              <h3>Company Gigs Management</h3>
+              <div style="display:flex;gap:8px;">
+                <button class="btn btn--ghost" id="admin-filter-all" data-ripple style="font-size:0.85rem;">All</button>
+                <button class="btn btn--ghost" id="admin-filter-pending" data-ripple style="font-size:0.85rem;">Pending</button>
+                <button class="btn btn--ghost" id="admin-filter-approved" data-ripple style="font-size:0.85rem;">Approved</button>
+                <button class="btn btn--ghost" id="admin-filter-rejected" data-ripple style="font-size:0.85rem;">Rejected</button>
+              </div>
+            </div>
+            <div class="card__body" id="admin-gigs-list"></div>
           </article>
         </section>
       </main>
