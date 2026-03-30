@@ -2,6 +2,18 @@ import { gigs, learningTracks, notifications, chatbotHints } from '../data/mockD
 
 const STORAGE_TOKEN_KEY = 'skillbridgeToken';
 const STORAGE_PROGRESS_KEY = 'skillbridgeProgress';
+const DEFAULT_REMOTE_API_BASE = 'https://skillbridge-ijbq.onrender.com';
+
+function resolveApiBase() {
+  const configured = typeof window.SKILLBRIDGE_API_BASE === 'string' ? window.SKILLBRIDGE_API_BASE.trim() : '';
+  if (configured) return configured.replace(/\/+$/, '');
+
+  const host = window.location.hostname;
+  const isLocalHost = host === 'localhost' || host === '127.0.0.1';
+  return isLocalHost ? '' : DEFAULT_REMOTE_API_BASE;
+}
+
+const API_BASE = resolveApiBase();
 
 const state = {
   page: 'dashboard',
@@ -1321,7 +1333,9 @@ async function apiRequest(url, options = {}) {
     headers.Authorization = `Bearer ${state.token}`;
   }
 
-  const response = await fetch(url, {
+  const requestUrl = /^https?:\/\//i.test(url) ? url : `${API_BASE}${url}`;
+
+  const response = await fetch(requestUrl, {
     ...options,
     headers
   });
