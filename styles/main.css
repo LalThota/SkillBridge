@@ -313,6 +313,8 @@ body.theme-dark .top-nav {
 
 .hero h1 > span.typed {
   display: inline-block;
+  justify-self: start;
+  width: max-content;
 }
 
 .typed {

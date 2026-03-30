@@ -80,8 +80,18 @@ function serializeUser(user) {
   };
 }
 
+function ensureDbReady(res) {
+  if (mongoose.connection.readyState !== 1) {
+    res.status(503).json({ message: 'Database unavailable. Please try again shortly.' });
+    return false;
+  }
+  return true;
+}
+
 app.post('/api/auth/signup', async (req, res) => {
   try {
+    if (!ensureDbReady(res)) return;
+
     const { name = '', email = '', password = '' } = req.body;
     if (!name.trim() || !email.trim() || password.length < 6) {
       return res.status(400).json({ message: 'Invalid signup payload' });
@@ -117,10 +127,17 @@ app.post('/api/auth/signup', async (req, res) => {
 
 app.post('/api/auth/login', async (req, res) => {
   try {
+    if (!ensureDbReady(res)) return;
+
     const { email = '', password = '' } = req.body;
-    const user = await User.findOne({ email: email.toLowerCase() });
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || password.length < 6) {
+      return res.status(400).json({ message: 'Invalid login payload' });
+    }
+
+    const user = await User.findOne({ email: cleanEmail });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(404).json({ message: 'Account not found. Please sign up first.' });
     }
 
     const ok = await bcrypt.compare(password, user.passwordHash);

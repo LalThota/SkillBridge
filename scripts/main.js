@@ -1033,6 +1033,16 @@ async function handleAuthSubmit(e) {
     closeAuth();
     showToast(mode === 'signup' ? 'Account created. Welcome to SkillBridge!' : 'Logged in successfully.', 'success');
   } catch (error) {
+    if (mode === 'login' && (error.status === 404 || /account not found/i.test(error.message || ''))) {
+      setFieldError('auth-email', 'No account found with this email. Please sign up first.');
+      showToast('No account found. Please sign up first.', 'info');
+      return;
+    }
+
+    if (mode === 'login' && error.status === 401) {
+      setFieldError('auth-password', 'Incorrect email or password.');
+    }
+
     showToast(error.message || 'Authentication failed.', 'warning');
   }
 }
@@ -1319,7 +1329,9 @@ async function apiRequest(url, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    throw new Error(data.message || 'Request failed');
+    const error = new Error(data.message || 'Request failed');
+    error.status = response.status;
+    throw error;
   }
 
   return data;
