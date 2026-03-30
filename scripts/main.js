@@ -2,18 +2,10 @@ import { gigs, learningTracks, notifications, chatbotHints } from '../data/mockD
 
 const STORAGE_TOKEN_KEY = 'skillbridgeToken';
 const STORAGE_PROGRESS_KEY = 'skillbridgeProgress';
-const DEFAULT_REMOTE_API_BASE = 'https://skillbridge-ijbq.onrender.com';
-
-function resolveApiBase() {
-  const configured = typeof window.SKILLBRIDGE_API_BASE === 'string' ? window.SKILLBRIDGE_API_BASE.trim() : '';
-  if (configured) return configured.replace(/\/+$/, '');
-
-  const host = window.location.hostname;
-  const isLocalHost = host === 'localhost' || host === '127.0.0.1';
-  return isLocalHost ? '' : DEFAULT_REMOTE_API_BASE;
-}
-
-const API_BASE = resolveApiBase();
+const DEMO_EMAIL = 'lal98thota@gmail.com';
+const DEMO_PASSWORD = 'Lalsatya98';
+const DEMO_NAME = 'Lal Thota';
+const DEMO_TOKEN = 'skillbridge-demo-token';
 
 const state = {
   page: 'dashboard',
@@ -118,21 +110,42 @@ let typeCharIndex = 0;
 let deleting = false;
 let heroWordTimer = null;
 
+function buildDemoUserPayload() {
+  return {
+    id: 'demo-user-1',
+    name: DEMO_NAME,
+    email: DEMO_EMAIL,
+    completedSkills: Array.from(state.completedSkills),
+    badges: state.badges,
+    xp: state.xp,
+    streak: state.streak,
+    completedGigs: state.completedGigs,
+    completedCourses: state.completedCourses,
+    activeDays: state.activeDays,
+    activeDates: Array.from(state.activeDates),
+    lastActiveDate: state.lastActiveDate
+  };
+}
+
 async function init() {
   bindEvents();
   loadLocalProgress();
-  await restoreSession();
-  trackDailyActivity();
-  fakeBoot();
-  
-  // Check if user is authenticated
+  const token = localStorage.getItem(STORAGE_TOKEN_KEY);
+  if (token === DEMO_TOKEN) {
+    state.token = token;
+  } else if (token) {
+    localStorage.removeItem(STORAGE_TOKEN_KEY);
+  }
+
   if (state.token) {
-    // User is logged in - show user dashboard
     showUserDashboard();
   } else {
-    // User is not logged in - show landing page
     showLandingPage();
   }
+
+  restoreSession();
+  trackDailyActivity();
+  fakeBoot();
 }
 
 function showLandingPage() {
@@ -255,7 +268,7 @@ function fakeBoot() {
     els.app.removeAttribute('hidden');
     const message = state.token ? 'Welcome back! SkillBridge is ready.' : 'Welcome to SkillBridge. Learn. Verify. Earn.';
     showToast(message, 'success');
-  }, 1200);
+  }, 220);
 }
 
 function bindEvents() {
@@ -1033,30 +1046,24 @@ async function handleAuthSubmit(e) {
 
   if (hasError) return;
 
-  try {
-    const endpoint = mode === 'signup' ? '/api/auth/signup' : '/api/auth/login';
-    const payload = mode === 'signup' ? { name, email, password } : { email, password };
-    const response = await apiRequest(endpoint, {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
-
-    applySession(response.token, response.user);
-    closeAuth();
-    showToast(mode === 'signup' ? 'Account created. Welcome to SkillBridge!' : 'Logged in successfully.', 'success');
-  } catch (error) {
-    if (mode === 'login' && (error.status === 404 || /account not found/i.test(error.message || ''))) {
-      setFieldError('auth-email', 'No account found with this email. Please sign up first.');
-      showToast('No account found. Please sign up first.', 'info');
-      return;
-    }
-
-    if (mode === 'login' && error.status === 401) {
-      setFieldError('auth-password', 'Incorrect email or password.');
-    }
-
-    showToast(error.message || 'Authentication failed.', 'warning');
+  if (mode === 'signup') {
+    showToast('Signup is disabled in demo mode. Use the demo login credentials.', 'info');
+    return;
   }
+
+  if (email.toLowerCase() !== DEMO_EMAIL) {
+    setFieldError('auth-email', 'Demo email is required: lal98thota@gmail.com');
+    return;
+  }
+
+  if (password !== DEMO_PASSWORD) {
+    setFieldError('auth-password', 'Incorrect demo password. Use: Lalsatya98');
+    return;
+  }
+
+  applySession(DEMO_TOKEN, buildDemoUserPayload());
+  closeAuth();
+  showToast('Logged in with demo account.', 'success');
 }
 
 function setFieldError(id, message) {
@@ -1287,68 +1294,21 @@ function applyUserPayload(user) {
 }
 
 async function restoreSession() {
-  const token = localStorage.getItem(STORAGE_TOKEN_KEY);
-  if (!token) return;
-  state.token = token;
-
-  try {
-    const res = await apiRequest('/api/activity/me');
-    applyUserPayload(res.user);
-  } catch {
+  const token = state.token || localStorage.getItem(STORAGE_TOKEN_KEY);
+  if (token !== DEMO_TOKEN) {
     localStorage.removeItem(STORAGE_TOKEN_KEY);
     state.token = '';
+    renderUserIdentity();
+    showLandingPage();
+    return;
   }
+
+  state.token = DEMO_TOKEN;
+  applyUserPayload(buildDemoUserPayload());
 }
 
 async function syncRemoteActivity() {
-  if (!state.token) return;
-  try {
-    const res = await apiRequest('/api/activity/sync', {
-      method: 'POST',
-      body: JSON.stringify({
-        completedSkills: Array.from(state.completedSkills),
-        badges: state.badges,
-        xp: state.xp,
-        streak: state.streak,
-        completedGigs: state.completedGigs,
-        completedCourses: state.completedCourses,
-        activeDays: state.activeDays,
-        activeDates: Array.from(state.activeDates),
-        lastActiveDate: state.lastActiveDate
-      })
-    });
-    applyUserPayload(res.user);
-  } catch {
-    // Keep local state if backend sync fails.
-  }
-}
-
-async function apiRequest(url, options = {}) {
-  const headers = {
-    'Content-Type': 'application/json',
-    ...(options.headers || {})
-  };
-
-  if (state.token) {
-    headers.Authorization = `Bearer ${state.token}`;
-  }
-
-  const requestUrl = /^https?:\/\//i.test(url) ? url : `${API_BASE}${url}`;
-
-  const response = await fetch(requestUrl, {
-    ...options,
-    headers
-  });
-
-  const data = await response.json().catch(() => ({}));
-
-  if (!response.ok) {
-    const error = new Error(data.message || 'Request failed');
-    error.status = response.status;
-    throw error;
-  }
-
-  return data;
+  // Frontend-only demo mode keeps progress in localStorage.
 }
 
 function startVoiceSearch() {
